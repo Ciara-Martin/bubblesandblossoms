@@ -1,12 +1,12 @@
 package controllers
 
-import ie.setu.models.Note
+import ie.setu.models.Client
 import utils.formatListString
 import java.util.ArrayList
 
-class NoteAPI() {
+class ClientAPI() {
 
-    private var notes = ArrayList<Note>()
+    private var clients = ArrayList<Client>()
 
     // ----------------------------------------------
     //  For Managing the id internally in the program
@@ -15,70 +15,58 @@ class NoteAPI() {
     private fun getId() = lastId++
 
     // ----------------------------------------------
-    //  CRUD METHODS FOR NOTE ArrayList
+    //  CRUD METHODS FOR CLIENT ArrayList
     // ----------------------------------------------
-    fun add(note: Note): Boolean {
-        note.noteId = getId()
-        return notes.add(note)
+    fun add(client: Client): Boolean {
+        client.clientId = getId()
+        return clients.add(client)
     }
 
-    fun delete(id: Int) = notes.removeIf { note -> note.noteId == id }
+    fun delete(id: Int) = clients.removeIf { client -> client.clientId == id }
 
-    fun update(id: Int, note: Note?): Boolean {
-        // find the note object by the index number
-        val foundNote = findNote(id)
+    fun update(id: Int, client: Client?): Boolean {
+        // find the client object by the index number
+        val foundClient = findClient(id)
 
-        // if the note exists, use the note details passed as parameters to update the found note in the ArrayList.
-        if ((foundNote != null) && (note != null)) {
-            foundNote.noteTitle = note.noteTitle
-            foundNote.notePriority = note.notePriority
-            foundNote.noteCategory = note.noteCategory
+        // if the client exists, use the client details passed as parameters to update the found client in the ArrayList.
+        if ((foundClient != null) && (client != null)) {
+            foundClient.clientId = client.clientId
+            foundClient.ClientName = client.ClientName
+            foundClient.email = client.email
+            foundClient.phone = client.phone
+            foundClient.PaymentMethod = client.PaymentMethod
             return true
         }
 
-        // if the note was not found, return false, indicating that the update was not successful
+        // if the client was not found, return false, indicating that the update was not successful
         return false
     }
 
-    fun archiveNote(id: Int): Boolean {
-        val foundNote = findNote(id)
-        if (( foundNote != null) && (!foundNote.isNoteArchived)
-          //  && ( foundNote.checkNoteCompletionStatus())
-        ){
-            foundNote.isNoteArchived = true
-            return true
-        }
-        return false
-    }
 
     // ----------------------------------------------
-    //  LISTING METHODS FOR NOTE ArrayList
+    //  LISTING METHODS FOR CLIENT ArrayList
     // ----------------------------------------------
-    fun listAllNotes() =
-        if (notes.isEmpty()) "No notes stored"
-        else formatListString(notes)
+    fun listAllClients() =
+        if (clients.isEmpty()) "No clients stored"
+        else formatListString(clients)
 
-    fun listActiveNotes() =
-        if (numberOfActiveNotes() == 0) "No active notes stored"
-        else formatListString(notes.filter { note -> !note.isNoteArchived })
+    /*fun listActiveClients() =
+        if (numberOfActiveClients() == 0) "No active clients stored"
+        else formatListString(clients.filter { client -> !client.isClientArchived })*/
 
-    fun listArchivedNotes() =
-        if (numberOfArchivedNotes() == 0) "No archived notes stored"
-        else formatListString(notes.filter { note -> note.isNoteArchived })
 
     // ----------------------------------------------
-    //  COUNTING METHODS FOR NOTE ArrayList
+    //  COUNTING METHODS FOR CLIENT ArrayList
     // ----------------------------------------------
-    fun numberOfNotes() = notes.size
-    fun numberOfArchivedNotes(): Int = notes.count { note: Note -> note.isNoteArchived }
-    fun numberOfActiveNotes(): Int = notes.count { note: Note -> !note.isNoteArchived }
+    fun numberOfClients() = clients.size
+    //fun numberOfActiveClients(): Int = clients.count { client: Client -> !client.isClientArchived }
 
     // ----------------------------------------------
     //  SEARCHING METHODS
     // ---------------------------------------------
-    fun findNote(noteId : Int) =  notes.find{ note -> note.noteId == noteId }
+    fun findClient(clientId : Int) =  clients.find{ client -> client.clientId == clientId }
 
-    fun searchNotesByTitle(searchString: String) =
-        formatListString(notes.filter { note -> note.noteTitle.contains(searchString, ignoreCase = true) })
+    fun searchClientsByTitle(searchString: String) =
+        formatListString(clients.filter { client -> client.ClientName.contains(searchString, ignoreCase = true) })
 
 }
