@@ -4,4 +4,5 @@ data class Client(  var clientId: Int = 0,
                     var ClientName: String,
                     var email: String,
                     var phone: Int,
-                    var PaymentMethod: String)
+                    var PaymentMethod: String,
+                    var isNewClient: Boolean = false)
