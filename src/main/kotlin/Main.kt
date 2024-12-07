@@ -1,5 +1,6 @@
 import controllers.ClientAPI
 import ie.setu.models.Client
+import ie.setu.models.Dog
 import utils.readNextInt
 import utils.readNextLine
 import kotlin.system.exitProcess
@@ -16,9 +17,9 @@ fun runMenu() {
             3 -> updateClient()
             4 -> deleteClient()
             5 -> markClientAsNew()
-            //6 -> addItemToClient()
-            //7 -> updateItemContentsInClient()
-            //8 -> deleteAnItem()
+            6 -> addDogToClient()
+            7 -> updateDogDetailsInClient()
+            8 -> deleteADog()
             //9 -> markItemStatus()
             10 -> searchClients()
             //15 -> searchItems()
@@ -42,9 +43,9 @@ fun mainMenu() = readNextInt(
          > |   5) Is this a new Client?                        |
          > -----------------------------------------------------  
          > | DOG MENU                                          | 
-         > |   6) ------------------                           |
-         > |   7) ------------------------------               |
-         > |   8) -----------------------                      |
+         > |   6) Add Dog To Client                            |
+         > |   7) Update Dog Details                           |
+         > |   8) Remove Dog from Files                        |
          > |   9) --------------------------                   | 
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
@@ -161,10 +162,61 @@ fun markClientAsNew() {
 }
 
 //-------------------------------------------
-//ITEM MENU (only available for active clients)
+//DOG MENU (only available for active clients)
 //-------------------------------------------
 
-//TODO
+private fun addDogToClient() {
+    val client: Client? = askUserToChooseClient()
+    if (client != null) {
+        if (client.addDog(Dog(
+                nameofdog = readNextLine("\t Dog Name: "),
+                breed = readNextLine("\t Dog Breed: "),
+                colour = readNextLine("\t Dog Colour: "),
+                size = readNextLine("\t Dog Size: "),
+                coattype = readNextLine("\t Dog Coat Type: "),
+                price = readNextInt("\t Dog Groom Price: "))))
+            println("Add Successful!")
+        else println("Add NOT Successful")
+    }
+}
+
+fun updateDogDetailsInClient() {
+    val client: Client? = askUserToChooseClient()
+    if (client != null) {
+        val dog: Dog? = askUserToChooseDog(client)
+        if (dog != null) {
+            //val newDetails = readNextLine("Enter new details: ")
+            if (client.update(dog.dogId, Dog(
+                    nameofdog = readNextLine("\t Dog Name: "),
+                    breed = readNextLine("\t Dog Breed: "),
+                    colour = readNextLine("\t Dog Colour: "),
+                    size = readNextLine("\t Dog Size: "),
+                    coattype = readNextLine("\t Dog Coat Type: "),
+                    price = readNextInt("\t Dog Groom Price: ")))) {
+                println("Dog Details updated")
+            } else {
+                println("Dog Details NOT updated")
+            }
+        } else {
+            println("Invalid Item Id")
+        }
+    }
+}
+
+fun deleteADog() {
+    val client: Client? = askUserToChooseClient()
+    if (client != null) {
+        val dog: Dog? = askUserToChooseDog(client)
+        if (dog!= null) {
+            val isDeleted = client.delete(dog.dogId)
+            if (isDeleted) {
+                println("Delete Successful!")
+            } else {
+                println("Delete NOT Successful")
+            }
+        }
+    }
+}
 
 //------------------------------------
 //CLIENT REPORTS MENU
@@ -197,12 +249,12 @@ fun exitApp() {
 //HELPER FUNCTIONS
 //------------------------------------
 
-/*private fun askUserToChooseActiveClient(): Client? {
-    listActiveClients()
-    if (clientAPI.numberOfActiveClients() > 0) {
+private fun askUserToChooseClient(): Client? {
+    listClients()
+    if (clientAPI.numberOfClients() > 0) {
         val client = clientAPI.findClient(readNextInt("\nEnter the id of the client: "))
         if (client != null) {
-            if (client.isClientArchived) {
+            if (client.isNewClient) {
                 println("Client is NOT Active, it is Archived")
             } else {
                 return client //chosen client is active
@@ -213,5 +265,16 @@ fun exitApp() {
     }
     return null //selected client is not active
 }
-*/
+
+private fun askUserToChooseDog(client: Client): Dog? {
+    if (client.numberOfDogs() > 0) {
+        print(client.listDogs())
+        return client.findOne(readNextInt("\nEnter the id of the dog: "))
+    }
+    else{
+        println ("No dog for chosen client")
+        return null
+    }
+}
+
 
