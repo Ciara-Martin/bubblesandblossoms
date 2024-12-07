@@ -18,7 +18,7 @@ fun runMenu() {
             4 -> deleteClient()
             5 -> markClientAsNew()
             6 -> addDogToClient()
-            //7 -> updateDogDetailsInClient()
+            7 -> updateDogDetailsInClient()
             //8 -> deleteADog()
             //9 -> markItemStatus()
             10 -> searchClients()
@@ -44,7 +44,7 @@ fun mainMenu() = readNextInt(
          > -----------------------------------------------------  
          > | DOG MENU                                          | 
          > |   6) Add Dog To Client                            |
-         > |   7) ------------------------------               |
+         > |   7) Update Dog Details                           |
          > |   8) -----------------------                      |
          > |   9) --------------------------                   | 
          > -----------------------------------------------------  
@@ -180,6 +180,29 @@ private fun addDogToClient() {
     }
 }
 
+fun updateDogDetailsInClient() {
+    val client: Client? = askUserToChooseClient()
+    if (client != null) {
+        val dog: Dog? = askUserToChooseDog(client)
+        if (dog != null) {
+            //val newDetails = readNextLine("Enter new details: ")
+            if (client.update(dog.dogId, Dog(
+                    nameofdog = readNextLine("\t Dog Name: "),
+                    breed = readNextLine("\t Dog Breed: "),
+                    colour = readNextLine("\t Dog Colour: "),
+                    size = readNextLine("\t Dog Size: "),
+                    coattype = readNextLine("\t Dog Coat Type: "),
+                    price = readNextInt("\t Dog Groom Price: ")))) {
+                println("Dog Details updated")
+            } else {
+                println("Dog Details NOT updated")
+            }
+        } else {
+            println("Invalid Item Id")
+        }
+    }
+}
+
 //------------------------------------
 //CLIENT REPORTS MENU
 //------------------------------------
@@ -226,6 +249,17 @@ private fun askUserToChooseClient(): Client? {
         }
     }
     return null //selected client is not active
+}
+
+private fun askUserToChooseDog(client: Client): Dog? {
+    if (client.numberOfDogs() > 0) {
+        print(client.listDogs())
+        return client.findOne(readNextInt("\nEnter the id of the dog: "))
+    }
+    else{
+        println ("No dog for chosen client")
+        return null
+    }
 }
 
 
