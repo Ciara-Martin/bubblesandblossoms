@@ -19,7 +19,7 @@ fun runMenu() {
             5 -> markClientAsNew()
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
-            //8 -> deleteADog()
+            8 -> deleteADog()
             //9 -> markItemStatus()
             10 -> searchClients()
             //15 -> searchItems()
@@ -45,7 +45,7 @@ fun mainMenu() = readNextInt(
          > | DOG MENU                                          | 
          > |   6) Add Dog To Client                            |
          > |   7) Update Dog Details                           |
-         > |   8) -----------------------                      |
+         > |   8) Remove Dog from Files                        |
          > |   9) --------------------------                   | 
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
@@ -199,6 +199,21 @@ fun updateDogDetailsInClient() {
             }
         } else {
             println("Invalid Item Id")
+        }
+    }
+}
+
+fun deleteADog() {
+    val client: Client? = askUserToChooseClient()
+    if (client != null) {
+        val dog: Dog? = askUserToChooseDog(client)
+        if (dog!= null) {
+            val isDeleted = client.delete(dog.dogId)
+            if (isDeleted) {
+                println("Delete Successful!")
+            } else {
+                println("Delete NOT Successful")
+            }
         }
     }
 }
