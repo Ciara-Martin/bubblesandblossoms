@@ -20,7 +20,7 @@ fun runMenu() {
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
             8 -> deleteADog()
-            //9 -> markItemStatus()
+            //9 -> groomedRecently()
             10 -> searchClients()
             //15 -> searchItems()
             //16 -> listToDoItems()
@@ -46,10 +46,9 @@ fun mainMenu() = readNextInt(
          > |   6) Add Dog To Client                            |
          > |   7) Update Dog Details                           |
          > |   8) Remove Dog from Files                        |
-         > |   9) --------------------------                   | 
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
-         > |   10) ------------------------------------        |
+         > |   10) Search for Client                           |
          > |   11) .....                                       |
          > |   12) .....                                       |
          > |   13) .....                                       |
@@ -219,10 +218,10 @@ fun deleteADog() {
 }
 
 //------------------------------------
-//CLIENT REPORTS MENU
+//SEARCH MENU
 //------------------------------------
 fun searchClients() {
-    val searchTitle = readNextLine("Enter the description to search by: ")
+    val searchTitle = readNextLine("Enter the name of the client you want to search for: ")
     val searchResults = clientAPI.searchClientsByTitle(searchTitle)
     if (searchResults.isEmpty()) {
         println("No clients found")
