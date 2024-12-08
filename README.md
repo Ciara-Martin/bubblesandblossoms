@@ -12,3 +12,14 @@ The project is organized into different packages:
 - **`utils`**: Contains helper methods for formatting lists and sets into strings.
 
 ---
+## Project Features
+- **`Add Client`**: Add a client to the app                       
+- **`Delete Client`**: Delete a client from the app
+- **`Update Client`**: Update a clients details
+- **`List Clients`**: List all or inactive clients
+- **`Is this an inactive Client`**: Mark if a cliet is inactive
+- **`Add Dog`**: Add a dog to a client
+- **`Update Dog`**: Update a dogs details
+- **`Remove`**: Removes a dog from a clients files
+- **`Search Client`**: Search for a client by name
+-  **`Search Dog`**: Search for a dog by name or breed
