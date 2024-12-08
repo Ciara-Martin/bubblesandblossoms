@@ -20,10 +20,10 @@ fun runMenu() {
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
             8 -> deleteADog()
-            //9 -> markItemStatus()
+            //9 -> groomedRecently()
             10 -> searchClients()
-            //15 -> searchItems()
-            //16 -> listToDoItems()
+            11 -> searchDogs()
+            12 -> searchBreeds()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -46,12 +46,11 @@ fun mainMenu() = readNextInt(
          > |   6) Add Dog To Client                            |
          > |   7) Update Dog Details                           |
          > |   8) Remove Dog from Files                        |
-         > |   9) --------------------------                   | 
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
-         > |   10) ------------------------------------        |
-         > |   11) .....                                       |
-         > |   12) .....                                       |
+         > |   10) Search for Client by Name                   |
+         > |   11) Search for Dog by Name                      |
+         > |   12) Search for Dog by Breed                     |
          > |   13) .....                                       |
          > |   14) .....                                       |
          > -----------------------------------------------------  
@@ -219,13 +218,33 @@ fun deleteADog() {
 }
 
 //------------------------------------
-//CLIENT REPORTS MENU
+//SEARCH MENU
 //------------------------------------
 fun searchClients() {
-    val searchTitle = readNextLine("Enter the description to search by: ")
+    val searchTitle = readNextLine("Enter the name of the client you want to search for: ")
     val searchResults = clientAPI.searchClientsByTitle(searchTitle)
     if (searchResults.isEmpty()) {
         println("No clients found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchDogs() {
+    val searchDogs = readNextLine("Enter the name of the dog you want to search for: ")
+    val searchResults = clientAPI.searchDogsByName(searchDogs)
+    if (searchResults.isEmpty()) {
+        println("No dogs found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchBreeds() {
+    val searchBreeds = readNextLine("Enter the breed of dog you want to search by: ")
+    val searchResults = clientAPI.searchDogsByBreed(searchBreeds)
+    if (searchResults.isEmpty()) {
+        println("No dogs found")
     } else {
         println(searchResults)
     }
