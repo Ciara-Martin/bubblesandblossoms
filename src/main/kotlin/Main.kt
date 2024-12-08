@@ -13,17 +13,16 @@ fun runMenu() {
     do {
         when (val option = mainMenu()) {
             1 -> addClient()
-            2 -> listClients()
+            2 -> deleteClient()
             3 -> updateClient()
-            4 -> deleteClient()
-            5 -> markClientAsNew()
+            4 -> listClients()
+            5 -> markClientAsInactive()
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
             8 -> deleteADog()
-            //9 -> groomedRecently()
-            10 -> searchClients()
-            11 -> searchDogs()
-            12 -> searchBreeds()
+            9 -> searchClients()
+            10 -> searchDogs()
+            11 -> searchBreeds()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -32,38 +31,36 @@ fun runMenu() {
 
 fun mainMenu() = readNextInt(
     """ 
-         > -----------------------------------------------------  
-         > |            BUBBLES AND BLOSSOMS APP               |
-         > -----------------------------------------------------  
-         > | CLIENT MENU                                       |
-         > |   1) Add a Client                                 |
-         > |   2) List Clients                                 |
-         > |   3) Update a Client                              |
-         > |   4) Delete a Client                              |
-         > |   5) Is this a new Client?                        |
-         > -----------------------------------------------------  
-         > | DOG MENU                                          | 
-         > |   6) Add Dog To Client                            |
-         > |   7) Update Dog Details                           |
-         > |   8) Remove Dog from Files                        |
-         > -----------------------------------------------------  
-         > | SEARCH MENU FOR CLIENTS                           | 
-         > |   10) Search for Client by Name                   |
-         > |   11) Search for Dog by Name                      |
-         > |   12) Search for Dog by Breed                     |
-         > |   13) .....                                       |
-         > |   14) .....                                       |
-         > -----------------------------------------------------  
-         > | REPORT MENU FOR DOGS                              |                                
-         > |   15) -------------------------------             |
-         > |   16) ---------------                             |
-         > |   17) .....                                       |
-         > |   18) .....                                       |
-         > |   19) .....                                       |
-         > -----------------------------------------------------  
-         > |   0) Exit                                         |
-         > -----------------------------------------------------  
-         > ==>> """.trimMargin(">")
+         > 
+         > 
+         >           ∘˙○˚.•.°.°• ∘˙○˚.•.°• ∘˙○˚.•∘˙○˚.•.°•∘˙○˚.•.°•∘˙○˚.•.°
+         >    °∘˙○˚.•.°∘˙○˚.•.°•   BUBBLES AND BLOSSOMS APP   .°• ∘˙○˚.•∘˙○˚.•.° 
+         >          ∘˙○˚.•.°.°• ∘˙○˚.•.°• ∘˙○˚.•∘˙○˚.•.°•∘˙○˚.•.°•∘˙○˚.•.° 
+         >                  
+         >        
+         >          옷 CLIENT MENU                          𐂯 DOG MENU 
+         >         
+         >       𝟏. Add a Client    
+         >       𝟐. Delete a Client                      𝟔. Add Dog To Client
+         >       𝟑. Update a Clients Details             𝟕. Update Dog Details
+         >       𝟒. List Clients                         𝟖. Remove Dog from Files
+         >       𝟓. Is this a new Client?            
+         > 
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
+         >         
+         >                                  ⌕ SEARCH  
+         >                                                          
+         >                         𝟗. Search for Client by Name                    
+         >                        𝟏𝟎. Search for Dog by Name                      
+         >                        𝟏𝟏. Search for Dog by Breed                 
+         >                          
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆  
+         > 
+         >                                   𝟎. Exit                                         
+         >                                 
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆ 
+         > 
+         > ○˚✿° : """.trimMargin(">")
 )
 
 //------------------------------------
@@ -87,16 +84,18 @@ fun listClients() {
     if (clientAPI.numberOfClients() > 0) {
         val option = readNextInt(
             """
-                  > --------------------------------
-                  > |   1) View ALL clients        |
-                  > |   2) View NEW clients        |
-                  > --------------------------------
+                  > ˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
+                  > 
+                  >          𝟏. View ALL clients        
+                  >          𝟐. View NEW clients   
+                  >           
+                  > ˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
          > ==>> """.trimMargin(">")
         )
 
         when (option) {
             1 -> listAllClients()
-            2 -> listNewClients()
+            2 -> listInactiveClients()
             else -> println("Invalid option entered: $option")
         }
     } else {
@@ -105,8 +104,7 @@ fun listClients() {
 }
 
 fun listAllClients() = println(clientAPI.listAllClients())
-fun listNewClients() = println(clientAPI.listNewClients())
-//fun listArchivedClients() = println(clientAPI.listArchivedClients())
+fun listInactiveClients() = println(clientAPI.listInactiveClients())
 
 fun updateClient() {
     listClients()
@@ -146,16 +144,16 @@ fun deleteClient() {
     }
 }
 
-fun markClientAsNew() {
-    listNewClients()
-    if (clientAPI.numberOfNewClients() > 0) {
+fun markClientAsInactive() {
+    listInactiveClients()
+    if (clientAPI.numberOfInactiveClients() > 0) {
         // only ask the user to choose the client to archive if active clients exist
-        val id = readNextInt("Enter the id of the client you want to mark as new: ")
+        val id = readNextInt("Enter the id of the client you want to mark as inactive: ")
         // pass the index of the client to ClientAPI for archiving and check for success.
-        if (clientAPI.markAsNew(id)) {
-            println("This client is now marked as new!")
+        if (clientAPI.markAsInactive(id)) {
+            println("This client is now marked as inactive!")
         } else {
-            println("This client is NOT marked as new")
+            println("This client is NOT marked as inactive")
         }
     }
 }
@@ -251,12 +249,6 @@ fun searchBreeds() {
 }
 
 //------------------------------------
-//ITEM REPORTS MENU
-//------------------------------------
-
-//TODO
-
-//------------------------------------
 // Exit App
 //------------------------------------
 fun exitApp() {
@@ -273,7 +265,7 @@ private fun askUserToChooseClient(): Client? {
     if (clientAPI.numberOfClients() > 0) {
         val client = clientAPI.findClient(readNextInt("\nEnter the id of the client: "))
         if (client != null) {
-            if (client.isNewClient) {
+            if (client.isInactiveClient) {
                 println("Client is NOT Active, it is Archived")
             } else {
                 return client //chosen client is active
