@@ -20,10 +20,9 @@ fun runMenu() {
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
             8 -> deleteADog()
-            //9 -> groomedRecently()
-            10 -> searchClients()
-            11 -> searchDogs()
-            12 -> searchBreeds()
+            9 -> searchClients()
+            10 -> searchDogs()
+            11 -> searchBreeds()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
@@ -48,19 +47,10 @@ fun mainMenu() = readNextInt(
          > |   8) Remove Dog from Files                        |
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
-         > |   10) Search for Client by Name                   |
-         > |   11) Search for Dog by Name                      |
-         > |   12) Search for Dog by Breed                     |
-         > |   13) .....                                       |
-         > |   14) .....                                       |
-         > -----------------------------------------------------  
-         > | REPORT MENU FOR DOGS                              |                                
-         > |   15) -------------------------------             |
-         > |   16) ---------------                             |
-         > |   17) .....                                       |
-         > |   18) .....                                       |
-         > |   19) .....                                       |
-         > -----------------------------------------------------  
+         > |   9) Search for Client by Name                    |
+         > |   10) Search for Dog by Name                      |
+         > |   11) Search for Dog by Breed                     |
+         > -----------------------------------------------------   
          > |   0) Exit                                         |
          > -----------------------------------------------------  
          > ==>> """.trimMargin(">")
