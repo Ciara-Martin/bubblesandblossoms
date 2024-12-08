@@ -7,7 +7,15 @@ import kotlin.system.exitProcess
 
 private val clientAPI = ClientAPI()
 
+/**
+ * Entry point of the application. Runs the main menu.
+ */
+
 fun main() = runMenu()
+
+/**
+ * Displays the main menu and handles user input to navigate through the application's features.
+ */
 
 fun runMenu() {
     do {
@@ -28,6 +36,11 @@ fun runMenu() {
         }
     } while (true)
 }
+
+/**
+ * Displays the main menu options to the user and reads their selection.
+ * @return The selected menu option as an integer.
+ */
 
 fun mainMenu() = readNextInt(
     """ 
@@ -66,6 +79,11 @@ fun mainMenu() = readNextInt(
 //------------------------------------
 //CLIENT MENU
 //------------------------------------
+
+/**
+ * Prompts the user to enter details for a new client and adds the client to the system.
+ */
+
 fun addClient() {
     val ClientName = readNextLine("Enter a name for the client: ")
     val email = readNextLine("Enter an email for the client: ")
@@ -80,6 +98,10 @@ fun addClient() {
     }
 }
 
+/**
+ * Displays a list of clients, allowing the user to choose viewing all or only inactive clients.
+ */
+
 fun listClients() {
     if (clientAPI.numberOfClients() > 0) {
         val option = readNextInt(
@@ -90,7 +112,8 @@ fun listClients() {
                   >          𝟐. View NEW clients   
                   >           
                   > ˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
-         > ==>> """.trimMargin(">")
+                  > 
+         > ○˚✿° : """.trimMargin(">")
         )
 
         when (option) {
@@ -103,8 +126,21 @@ fun listClients() {
     }
 }
 
+/**
+ * Prints a list of all clients.
+ */
+
 fun listAllClients() = println(clientAPI.listAllClients())
+
+/**
+ * Prints a list of all inactive clients.
+ */
+
 fun listInactiveClients() = println(clientAPI.listInactiveClients())
+
+/**
+ * Allows the user to update an existing client's details.
+ */
 
 fun updateClient() {
     listClients()
@@ -129,6 +165,10 @@ fun updateClient() {
     }
 }
 
+/**
+ * Allows the user to delete an existing client by their ID.
+ */
+
 fun deleteClient() {
     listClients()
     if (clientAPI.numberOfClients() > 0) {
@@ -143,6 +183,10 @@ fun deleteClient() {
         }
     }
 }
+
+/**
+ * Marks a client as inactive if they exist and are active.
+ */
 
 fun markClientAsInactive() {
     listInactiveClients()
@@ -161,6 +205,9 @@ fun markClientAsInactive() {
 //-------------------------------------------
 //DOG MENU (only available for active clients)
 //-------------------------------------------
+/**
+ * Adds a new dog to a selected client.
+ */
 
 private fun addDogToClient() {
     val client: Client? = askUserToChooseClient()
@@ -176,6 +223,12 @@ private fun addDogToClient() {
         else println("Add NOT Successful")
     }
 }
+
+/**
+ * Updates the details of a dog for a selected client.
+ * Prompts the user to choose a client and then a dog, and allows them to enter new details for the dog.
+ * If the update is successful, a success message is displayed; otherwise, a failure message is shown.
+ */
 
 fun updateDogDetailsInClient() {
     val client: Client? = askUserToChooseClient()
@@ -200,6 +253,12 @@ fun updateDogDetailsInClient() {
     }
 }
 
+/**
+ * Deletes a dog from the selected client's records.
+ * Prompts the user to choose a client and then a dog. If the deletion is successful, a confirmation message is displayed.
+ * Otherwise, a failure message is shown.
+ */
+
 fun deleteADog() {
     val client: Client? = askUserToChooseClient()
     if (client != null) {
@@ -218,6 +277,12 @@ fun deleteADog() {
 //------------------------------------
 //SEARCH MENU
 //------------------------------------
+/**
+ * Searches for clients by their name.
+ * Prompts the user to enter a client name, and displays the search results.
+ * If no clients are found, a message is displayed indicating no clients were found.
+ */
+
 fun searchClients() {
     val searchTitle = readNextLine("Enter the name of the client you want to search for: ")
     val searchResults = clientAPI.searchClientsByTitle(searchTitle)
@@ -228,6 +293,12 @@ fun searchClients() {
     }
 }
 
+/**
+ * Searches for dogs by their name.
+ * Prompts the user to enter a dog name, and displays the search results.
+ * If no dogs are found, a message is displayed indicating no dogs were found.
+ */
+
 fun searchDogs() {
     val searchDogs = readNextLine("Enter the name of the dog you want to search for: ")
     val searchResults = clientAPI.searchDogsByName(searchDogs)
@@ -237,6 +308,12 @@ fun searchDogs() {
         println(searchResults)
     }
 }
+
+/**
+ * Searches for dogs by their breed.
+ * Prompts the user to enter a breed name, and displays the search results.
+ * If no dogs are found with the specified breed, a message is displayed indicating no dogs were found.
+ */
 
 fun searchBreeds() {
     val searchBreeds = readNextLine("Enter the breed of dog you want to search by: ")
@@ -251,6 +328,12 @@ fun searchBreeds() {
 //------------------------------------
 // Exit App
 //------------------------------------
+
+/**
+ * Exits the application.
+ * Displays a farewell message and terminates the program.
+ */
+
 fun exitApp() {
     println("Exiting...bye")
     exitProcess(0)
@@ -259,6 +342,13 @@ fun exitApp() {
 //------------------------------------
 //HELPER FUNCTIONS
 //------------------------------------
+/**
+ * Prompts the user to choose a client from the list of active clients.
+ * Displays the list of clients and allows the user to select one by entering the client ID.
+ * Returns the selected client if valid, or null if no valid client is selected.
+ *
+ * @return The chosen [Client], or null if no valid client is selected.
+ */
 
 private fun askUserToChooseClient(): Client? {
     listClients()
@@ -276,6 +366,15 @@ private fun askUserToChooseClient(): Client? {
     }
     return null //selected client is not active
 }
+
+/**
+ * Prompts the user to choose a dog for the selected client.
+ * Displays the list of dogs for the client and allows the user to select one by entering the dog ID.
+ * Returns the selected dog if valid, or null if no valid dog is selected.
+ *
+ * @param client The client whose dogs are to be displayed and chosen from.
+ * @return The chosen [Dog], or null if no valid dog is selected.
+ */
 
 private fun askUserToChooseDog(client: Client): Dog? {
     if (client.numberOfDogs() > 0) {
