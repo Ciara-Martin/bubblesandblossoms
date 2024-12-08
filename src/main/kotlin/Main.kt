@@ -109,7 +109,7 @@ fun listClients() {
                   > ˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
                   > 
                   >          𝟏. View ALL clients        
-                  >          𝟐. View NEW clients   
+                  >          𝟐. View INACTIVE clients   
                   >           
                   > ˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
                   > 
