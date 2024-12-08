@@ -93,6 +93,23 @@ class ClientAPI() {
             else listOfClients
         }
     }
+
+    fun searchDogsByBreed(searchString: String): String {
+        return if (numberOfClients() == 0) "No clients stored"
+        else {
+            var listOfClients = ""
+            for (client in clients) {
+                for (dog in client.dogs) {
+                    if (dog.breed.contains(searchString, ignoreCase = true)) {
+                        listOfClients += "${client.clientId}: ${client.ClientName} \n\t${dog}\n"
+                    }
+                }
+            }
+            if (listOfClients == "") "No dogs found for: $searchString"
+            else listOfClients
+        }
+    }
+
 }
 
 
