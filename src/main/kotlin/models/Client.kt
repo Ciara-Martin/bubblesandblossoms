@@ -7,7 +7,7 @@ data class Client(  var clientId: Int = 0,
                     var email: String,
                     var phone: Int,
                     var PaymentMethod: String,
-                    var isNewClient: Boolean = false,
+                    var isInactiveClient: Boolean = false,
                     var dogs: MutableSet<Dog> = mutableSetOf()) {
 
     private var lastDogId = 0
@@ -53,7 +53,7 @@ data class Client(  var clientId: Int = 0,
         else  formatSetString(dogs)
 
     override fun toString(): String {
-        val newClient = if (isNewClient) 'Y' else 'N'
+        val InactiveClient = if (isInactiveClient) 'Y' else 'N'
         return "$clientId: $ClientName, Email($email), Phone($phone), Payment Method($PaymentMethod) \n${listDogs()}"
     }
 

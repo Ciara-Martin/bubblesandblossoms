@@ -41,11 +41,11 @@ class ClientAPI() {
         // if the client was not found, return false, indicating that the update was not successful
         return false
     }
-    fun markAsNew(id: Int): Boolean {
+    fun markAsInactive(id: Int): Boolean {
         val foundClient = findClient(id)
-        if (( foundClient != null) && (!foundClient.isNewClient)
+        if (( foundClient != null) && (!foundClient.isInactiveClient)
         ){
-            foundClient.isNewClient = true
+            foundClient.isInactiveClient = true
             return true
         }
         return false
@@ -59,16 +59,16 @@ class ClientAPI() {
         if (clients.isEmpty()) "No clients stored"
         else formatListString(clients)
 
-    fun listNewClients() =
-        if (clients.filter { it.isNewClient }.isEmpty()) "No new clients stored"
-        else formatListString(clients.filter { it.isNewClient })
+    fun listInactiveClients() =
+        if (clients.filter { it.isInactiveClient }.isEmpty()) "No inactive clients stored"
+        else formatListString(clients.filter { it.isInactiveClient })
 
 
     // ----------------------------------------------
     //  COUNTING METHODS FOR CLIENT ArrayList
     // ----------------------------------------------
     fun numberOfClients() = clients.size
-    fun numberOfNewClients(): Int = clients.count { client: Client -> !client.isNewClient }
+    fun numberOfInactiveClients(): Int = clients.count { client: Client -> !client.isInactiveClient }
 
     // ----------------------------------------------
     //  SEARCHING METHODS

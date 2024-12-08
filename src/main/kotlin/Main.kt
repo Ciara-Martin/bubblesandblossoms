@@ -16,7 +16,7 @@ fun runMenu() {
             2 -> deleteClient()
             3 -> updateClient()
             4 -> listClients()
-            5 -> markClientAsNew()
+            5 -> markClientAsInactive()
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
             8 -> deleteADog()
@@ -38,7 +38,7 @@ fun mainMenu() = readNextInt(
          >          ∘˙○˚.•.°.°• ∘˙○˚.•.°• ∘˙○˚.•∘˙○˚.•.°•∘˙○˚.•.°•∘˙○˚.•.° 
          >                  
          >        
-         >       옷 CLIENT MENU                          𐂯 DOG MENU 
+         >          옷 CLIENT MENU                          𐂯 DOG MENU 
          >         
          >       𝟏. Add a Client    
          >       𝟐. Delete a Client                      𝟔. Add Dog To Client
@@ -95,7 +95,7 @@ fun listClients() {
 
         when (option) {
             1 -> listAllClients()
-            2 -> listNewClients()
+            2 -> listInactiveClients()
             else -> println("Invalid option entered: $option")
         }
     } else {
@@ -104,8 +104,7 @@ fun listClients() {
 }
 
 fun listAllClients() = println(clientAPI.listAllClients())
-fun listNewClients() = println(clientAPI.listNewClients())
-//fun listArchivedClients() = println(clientAPI.listArchivedClients())
+fun listInactiveClients() = println(clientAPI.listInactiveClients())
 
 fun updateClient() {
     listClients()
@@ -145,16 +144,16 @@ fun deleteClient() {
     }
 }
 
-fun markClientAsNew() {
-    listNewClients()
-    if (clientAPI.numberOfNewClients() > 0) {
+fun markClientAsInactive() {
+    listInactiveClients()
+    if (clientAPI.numberOfInactiveClients() > 0) {
         // only ask the user to choose the client to archive if active clients exist
-        val id = readNextInt("Enter the id of the client you want to mark as new: ")
+        val id = readNextInt("Enter the id of the client you want to mark as inactive: ")
         // pass the index of the client to ClientAPI for archiving and check for success.
-        if (clientAPI.markAsNew(id)) {
-            println("This client is now marked as new!")
+        if (clientAPI.markAsInactive(id)) {
+            println("This client is now marked as inactive!")
         } else {
-            println("This client is NOT marked as new")
+            println("This client is NOT marked as inactive")
         }
     }
 }
@@ -250,12 +249,6 @@ fun searchBreeds() {
 }
 
 //------------------------------------
-//ITEM REPORTS MENU
-//------------------------------------
-
-//TODO
-
-//------------------------------------
 // Exit App
 //------------------------------------
 fun exitApp() {
@@ -272,7 +265,7 @@ private fun askUserToChooseClient(): Client? {
     if (clientAPI.numberOfClients() > 0) {
         val client = clientAPI.findClient(readNextInt("\nEnter the id of the client: "))
         if (client != null) {
-            if (client.isNewClient) {
+            if (client.isInactiveClient) {
                 println("Client is NOT Active, it is Archived")
             } else {
                 return client //chosen client is active
