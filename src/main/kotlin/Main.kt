@@ -22,7 +22,7 @@ fun runMenu() {
             8 -> deleteADog()
             //9 -> groomedRecently()
             10 -> searchClients()
-            //15 -> searchItems()
+            11 -> searchDogs()
             //16 -> listToDoItems()
             0 -> exitApp()
             else -> println("Invalid menu choice: $option")
@@ -48,8 +48,8 @@ fun mainMenu() = readNextInt(
          > |   8) Remove Dog from Files                        |
          > -----------------------------------------------------  
          > | SEARCH MENU FOR CLIENTS                           | 
-         > |   10) Search for Client                           |
-         > |   11) .....                                       |
+         > |   10) Search for Client by Name                   |
+         > |   11) Search for Dog by Name                      |
          > |   12) .....                                       |
          > |   13) .....                                       |
          > |   14) .....                                       |
@@ -225,6 +225,16 @@ fun searchClients() {
     val searchResults = clientAPI.searchClientsByTitle(searchTitle)
     if (searchResults.isEmpty()) {
         println("No clients found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchDogs() {
+    val searchDogs = readNextLine("Enter the name of the dog you want to search for: ")
+    val searchResults = clientAPI.searchDogsByName(searchDogs)
+    if (searchResults.isEmpty()) {
+        println("No dogs found")
     } else {
         println(searchResults)
     }

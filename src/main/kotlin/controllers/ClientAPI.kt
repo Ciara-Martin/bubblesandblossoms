@@ -78,6 +78,21 @@ class ClientAPI() {
     fun searchClientsByTitle(searchString: String) =
         formatListString(clients.filter { client -> client.ClientName.contains(searchString, ignoreCase = true) })
 
+    fun searchDogsByName(searchString: String): String {
+        return if (numberOfClients() == 0) "No clients stored"
+        else {
+            var listOfClients = ""
+            for (client in clients) {
+                for (dog in client.dogs) {
+                     if (dog.nameofdog.contains(searchString, ignoreCase = true)) {
+                        listOfClients += "${client.clientId}: ${client.ClientName} \n\t${dog}\n"
+                    }
+                }
+            }
+            if (listOfClients == "") "No dogs found for: $searchString"
+            else listOfClients
+        }
+    }
 }
 
 
