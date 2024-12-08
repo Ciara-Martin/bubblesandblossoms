@@ -1,6 +1,7 @@
 package utils
 
 
+
 /**
  * Reads an integer from the user input after displaying a prompt.
  * If the input is invalid, the user is asked to re-enter a value.
@@ -18,6 +19,7 @@ fun readNextInt(prompt: String?): Int {
         }
     } while (true)
 }
+
 
 
 /**
