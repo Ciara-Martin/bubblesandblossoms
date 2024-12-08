@@ -53,11 +53,11 @@ fun mainMenu() = readNextInt(
          >        
          >          옷 CLIENT MENU                          𐂯 DOG MENU 
          >         
-         >       𝟏. Add a Client    
-         >       𝟐. Delete a Client                      𝟔. Add Dog To Client
-         >       𝟑. Update a Clients Details             𝟕. Update Dog Details
-         >       𝟒. List Clients                         𝟖. Remove Dog from Files
-         >       𝟓. Is this a new Client?            
+         >       𝟏. Add a Client                         𝟔. Add Dog To Client
+         >       𝟐. Delete a Client                      𝟕. Update Dog Details
+         >       𝟑. Update a Clients Details             𝟖. Remove Dog from Files
+         >       𝟒. List Clients                         
+         >       𝟓. Is this an inactive Client?            
          > 
          >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
          >         
