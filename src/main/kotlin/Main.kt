@@ -13,9 +13,9 @@ fun runMenu() {
     do {
         when (val option = mainMenu()) {
             1 -> addClient()
-            2 -> listClients()
+            2 -> deleteClient()
             3 -> updateClient()
-            4 -> deleteClient()
+            4 -> listClients()
             5 -> markClientAsNew()
             6 -> addDogToClient()
             7 -> updateDogDetailsInClient()
@@ -31,29 +31,36 @@ fun runMenu() {
 
 fun mainMenu() = readNextInt(
     """ 
-         > -----------------------------------------------------  
-         > |            BUBBLES AND BLOSSOMS APP               |
-         > -----------------------------------------------------  
-         > | CLIENT MENU                                       |
-         > |   1) Add a Client                                 |
-         > |   2) List Clients                                 |
-         > |   3) Update a Client                              |
-         > |   4) Delete a Client                              |
-         > |   5) Is this a new Client?                        |
-         > -----------------------------------------------------  
-         > | DOG MENU                                          | 
-         > |   6) Add Dog To Client                            |
-         > |   7) Update Dog Details                           |
-         > |   8) Remove Dog from Files                        |
-         > -----------------------------------------------------  
-         > | SEARCH MENU FOR CLIENTS                           | 
-         > |   9) Search for Client by Name                    |
-         > |   10) Search for Dog by Name                      |
-         > |   11) Search for Dog by Breed                     |
-         > -----------------------------------------------------   
-         > |   0) Exit                                         |
-         > -----------------------------------------------------  
-         > ==>> """.trimMargin(">")
+         > 
+         > 
+         >                   .°• ∘˙○˚.•.°• ∘˙○˚.•∘˙○˚.•.°•∘˙○˚.•.°•
+         >              ∘˙○˚.•.°•   BUBBLES AND BLOSSOMS APP   .°• ∘˙○˚.• 
+         >                   .°• ∘˙○˚.•.°• ∘˙○˚.•∘˙○˚.•.°•∘˙○˚.•.°• 
+         >                  
+         >        
+         >       옷 CLIENT MENU                          𐂯 DOG MENU 
+         >         
+         >       𝟏. Add a Client    
+         >       𝟐. Delete a Client                      𝟔. Add Dog To Client
+         >       𝟑. Update a Clients Details             𝟕. Update Dog Details
+         >       𝟒. List Clients                         𝟖. Remove Dog from Files
+         >       𝟓. Is this a new Client?            
+         > 
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿
+         >         
+         >                                  ⌕ SEARCH  
+         >                                                          
+         >                         𝟗. Search for Client by Name                    
+         >                        𝟏𝟎. Search for Dog by Name                      
+         >                        𝟏𝟏. Search for Dog by Breed                 
+         >                          
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆  
+         > 
+         >                                   𝟎. Exit                                         
+         >                                 
+         >  ⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆˚✿˖°⋆ 
+         > 
+         > ○˚✿° : """.trimMargin(">")
 )
 
 //------------------------------------
