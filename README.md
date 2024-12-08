@@ -17,7 +17,7 @@ The project is organized into different packages:
 - **`Delete Client`**: Delete a client from the app
 - **`Update Client`**: Update a clients details
 - **`List Clients`**: List all or inactive clients
-- **`Is this an inactive Client`**: Mark if a cliet is inactive
+- **`Is this an inactive Client`**: Mark if a client is inactive
 - **`Add Dog`**: Add a dog to a client
 - **`Update Dog`**: Update a dogs details
 - **`Remove`**: Removes a dog from a clients files
