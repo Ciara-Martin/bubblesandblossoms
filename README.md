@@ -23,3 +23,16 @@ The project is organized into different packages:
 - **`Remove`**: Removes a dog from a clients files
 - **`Search Client`**: Search for a client by name
 -  **`Search Dog`**: Search for a dog by name or breed
+
+## Usage
+**Run the Application:**
+When you run the program, it displays the main menu with options for managing and searching through clients and dogs.
+
+**Navigate through the Menu:**
+Use the number keys to navigate through the menu options. For example:
+
+- `1` to add a client
+- `2` to delete a client
+- `3` to update a client
+- `9` to search for a client by name
+- `0` to exit the application
